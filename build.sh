@@ -1,6 +1,7 @@
 export $(grep -v '^#' .env | xargs)
 
-docker build --tag $IMAGE_NAME --platform linux/amd64 .
+rm -rf ./build
+docker build --platform linux/amd64 --tag $IMAGE_NAME --build-arg IMAGE_NAME=$IMAGE_NAME .
 CONTAINER=$(docker create --platform linux/amd64 $IMAGE_NAME)
 docker cp $CONTAINER:/build .
 docker rm $CONTAINER

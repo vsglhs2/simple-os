@@ -1,5 +1,7 @@
 FROM randomdude/gcc-cross-x86_64-elf
 
+ARG IMAGE_NAME
+
 WORKDIR /usr/app
 
 COPY ./src ./
@@ -13,7 +15,7 @@ RUN ld -m elf_i386 -o build/kernel.bin -Ttext 0x1000 build/bootstrap.o build/ker
 
 RUN nasm boot.asm -f bin -o build/boot.bin
 
-RUN cat build/boot.bin build/kernel.bin > build/os-image
+RUN cat build/boot.bin build/kernel.bin > build/${IMAGE_NAME}
 
 RUN mkdir -p /build && cp -r build/* /build
 

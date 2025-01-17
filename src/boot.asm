@@ -47,9 +47,9 @@ BOOT_DRIVE:
 REAL_MODE_MSG:
     db "Started in 16-bit mode", 0
 PROTECTED_MODE_MSG:
-    db "Landed in 32-bit protected mode", 0    
+    db "Landed in 32-bit protected mode", 0
 KERNEL_LOAD_MSG:
-    db "Loading kernel into memory", 0      
-    
+    db "Loading kernel into memory", 0
+
 times 510-($-$$) db 0
 dw 0xaa55
