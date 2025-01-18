@@ -9,7 +9,7 @@ _next_char:
     shr dx, 4
 
     sub bx, 1
-    sub al, 1   
+    sub al, 1
 
     jmp _next_char
 
@@ -42,5 +42,4 @@ print_h:
     ret
 
 _HEX_OUTPUT:
-    db '0x0000', 0
-    
+    db "0x0000", 0

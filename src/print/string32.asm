@@ -6,7 +6,7 @@ WHITE_ON_BLACK equ 0x0f
 print_s32:
     pusha
     mov edx, VIDEO_MEMORY
-    mov ah, WHITE_ON_BLACK    
+    mov ah, WHITE_ON_BLACK
 
 _next_char32:
     mov al, [ebx]

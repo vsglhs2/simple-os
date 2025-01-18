@@ -4,6 +4,7 @@ brew install qemu
 cp .env.example .env
 chmod +x ./build.sh
 chmod +x ./run.sh
+chmod +x ./build-and-run.sh
 ```
 
 # Compile

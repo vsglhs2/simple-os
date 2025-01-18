@@ -1,6 +1,6 @@
 load_drive:
     push dx
-    
+
     mov ah, 0x02
     mov al, dh
     mov dh, 0x00
@@ -29,4 +29,4 @@ _drive_error:
     ret
 
 _DRIVE_ERROR_MSG:
-    db 'Drive read error!', 0
+    db "Drive read error!", 0
