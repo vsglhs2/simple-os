@@ -1,18 +1,31 @@
-# Install
+# Preparation
 ```
-brew install qemu
 cp .env.example .env
-chmod +x ./build.sh
-chmod +x ./run.sh
-chmod +x ./build-and-run.sh
 ```
 
-# Compile
-```
-./build.sh
-```
+# Dependencies
+## Run
+- qemu
+## Compilation
+### Native
+- make
+- gcc
+- ld
+- nasm
+### Docker
+- docker
 
-# Run
+# Scripts
+## Compilation
+### Native
 ```
-./run.sh
+make
+```
+### Docker
+```
+make docker
+```
+## Run
+```
+make run
 ```

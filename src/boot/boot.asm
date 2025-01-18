@@ -14,12 +14,12 @@ call switch_to_protected_mode
 
 jmp $
 
-%include 'print/string.asm'
-%include 'print/string32.asm'
-%include 'gdt.asm'
-%include 'pm.asm'
-%include 'drive/load.asm'
-%include 'print/hex.asm'
+%include "print/string.asm"
+%include "print/string32.asm"
+%include "gdt.asm"
+%include "pm.asm"
+%include "drive/load.asm"
+%include "print/hex.asm"
 
 [bits 16]
 load_kernel:
