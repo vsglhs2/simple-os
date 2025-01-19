@@ -3,6 +3,7 @@ FROM randomdude/gcc-cross-x86_64-elf
 WORKDIR /usr/app
 
 ARG IMAGE_NAME
+ARG DEBUG
 
 COPY ./src ./src
 COPY ./Makefile .
@@ -10,7 +11,7 @@ COPY ./Makefile .
 RUN apt-get -y install nasm make
 
 RUN touch .env
-RUN echo "IMAGE_NAME=${IMAGE_NAME}\nENVIRONMENT=native" >> .env
+RUN echo "IMAGE_NAME=${IMAGE_NAME}\nDEBUG=${DEBUG}\nENVIRONMENT=native" >> .env
 RUN cat .env
 RUN mkdir -p build
 

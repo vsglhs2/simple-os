@@ -1,12 +1,10 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build docker",
+            "label": "Build",
             "type": "shell",
-            "command": "make docker",
+            "command": "make",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
@@ -27,6 +25,16 @@
                 "focus": false,
                 "panel": "shared",
             }
-        }
+        },
+        {
+            "label": "Run image (Debug)",
+            "type": "shell",
+            "command": "echo 'Qemu started (Debug)'; make debug",
+            "presentation": {
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+            }
+        },
     ]
 }
