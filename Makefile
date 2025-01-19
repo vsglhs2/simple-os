@@ -4,6 +4,8 @@ HEADERS = src/include
 C_SOURCES = $(shell find src -name "*.c")
 OBJECTS = $(patsubst src/%.c, build/%.o, $(C_SOURCES))
 
+QEMU = qemu-system-i386
+
 CC = gcc
 CC_FLAGS = -fno-pic -m32 -ffreestanding
 
@@ -30,10 +32,11 @@ sources:
 	@echo "Objects: $(OBJECTS)"
 
 run: all
-	qemu-system-x86_64 -drive format=raw,file=build/${IMAGE_NAME},index=0,media=disk
+	$(QEMU) -drive format=raw,file=build/${IMAGE_NAME},index=0,media=disk
 
 debug: all
-	qemu-system-x86_64 -drive format=raw,file=build/${IMAGE_NAME},index=0,media=disk -s -S
+	$(QEMU) -drive format=raw,file=build/${IMAGE_NAME},index=0,media=disk -s -S & \
+	lldb build/kernel.elf -o "gdb-remote localhost:1234"
 
 docker:
 	rm -rf build

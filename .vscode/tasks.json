@@ -29,12 +29,7 @@
         {
             "label": "Run image (Debug)",
             "type": "shell",
-            "command": "echo 'Qemu started (Debug)'; make debug",
-            "presentation": {
-                "reveal": "silent",
-                "focus": false,
-                "panel": "shared",
-            }
+            "command": "make debug",
         },
     ]
 }
