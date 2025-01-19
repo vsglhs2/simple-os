@@ -1,13 +1,17 @@
 include .env
 
+ifeq (${ENVIRONMENT}, docker)
+all: docker
+else
 all: image
+endif
 
 run: all
 	qemu-system-x86_64 -drive format=raw,file=build/${IMAGE_NAME}
 
 docker:
 	rm -rf build
-	docker build --platform linux/amd64 --tag ${IMAGE_NAME} .
+	docker build --platform linux/amd64 --tag ${IMAGE_NAME} --build-arg IMAGE_NAME=${IMAGE_NAME} .
 	CONTAINER=$$(docker create --platform linux/amd64 ${IMAGE_NAME}); \
 	docker cp $$CONTAINER:/build .; \
 	docker rm $$CONTAINER; \
