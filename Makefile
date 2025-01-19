@@ -20,6 +20,8 @@ NASM_FLAGS += -g
 BOOT_NASM_FLAGS += -g
 endif
 
+_DUMMY := $(shell mkdir -p build)
+
 ifeq (${ENVIRONMENT}, docker)
 all: docker
 else

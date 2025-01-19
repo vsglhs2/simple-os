@@ -13,7 +13,6 @@ RUN apt-get -y install nasm make
 RUN touch .env
 RUN echo "IMAGE_NAME=${IMAGE_NAME}\nDEBUG=${DEBUG}\nENVIRONMENT=native" >> .env
 RUN cat .env
-RUN mkdir -p build
 
 RUN make
 
