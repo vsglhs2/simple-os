@@ -17,13 +17,8 @@ cp .env.example .env
 
 # Scripts
 ## Compilation
-### Native
 ```
 make
-```
-### Docker
-```
-make docker
 ```
 ## Run
 ```
