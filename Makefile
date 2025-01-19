@@ -5,6 +5,7 @@ C_SOURCES = $(shell find src -name "*.c")
 OBJECTS = $(patsubst src/%.c, build/%.o, $(C_SOURCES))
 
 QEMU = qemu-system-i386
+QEMU_FLAGS = -drive format=raw,file=build/${IMAGE_NAME},index=0,media=disk
 
 CC = gcc
 CC_FLAGS = -fno-pic -m32 -ffreestanding
@@ -13,6 +14,10 @@ NASM_FLAGS = -f elf
 BOOT_NASM_FLAGS = -I src/boot
 BOOT_NASM_FLAGS_ELF = -f elf $(BOOT_NASM_FLAGS)
 BOOT_NASM_FLAGS_BIN = -f bin $(BOOT_NASM_FLAGS)
+
+ifeq (${DISPLAY}, false)
+QEMU_FLAGS += -nographic
+endif
 
 ifeq (${DEBUG}, true)
 CC_FLAGS += -g
@@ -34,15 +39,15 @@ sources:
 	@echo "Objects: $(OBJECTS)"
 
 run: all
-	$(QEMU) -drive format=raw,file=build/${IMAGE_NAME},index=0,media=disk
+	$(QEMU) $(QEMU_FLAGS)
 
 debug: all
-	$(QEMU) -drive format=raw,file=build/${IMAGE_NAME},index=0,media=disk -s -S & \
+	$(QEMU) $(QEMU_FLAGS) -s -S & \
 	lldb build/kernel.elf -o "gdb-remote localhost:1234"
 
 docker:
 	rm -rf build
-	docker build --platform linux/amd64 --tag ${IMAGE_NAME} --build-arg IMAGE_NAME=${IMAGE_NAME} --build-arg DEBUG=${DEBUG} -f Dockerfile.image .
+	docker build --platform linux/amd64 --tag ${IMAGE_NAME} --build-arg IMAGE_NAME=${IMAGE_NAME} --build-arg DEBUG=${DEBUG} --build-arg DISPLAY=${DISPLAY} -f Dockerfile.image .
 	CONTAINER=$$(docker create --platform linux/amd64 ${IMAGE_NAME}); \
 	docker cp $$CONTAINER:/build .; \
 	docker rm $$CONTAINER; \
