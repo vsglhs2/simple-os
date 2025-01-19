@@ -1,12 +1,7 @@
-void some_func() {
-
-}
+#include "../include/drivers/screen.h"
 
 int main() {
-    char *VIDEO_MEMORY_POINTER = (char *) 0xb8000;
-    *VIDEO_MEMORY_POINTER = 'X';
-
-    some_func();
+    print_string("Hello, world!");
 
     return 0;
 }
